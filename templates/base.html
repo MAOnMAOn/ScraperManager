@@ -48,7 +48,7 @@
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu" id="nav-accordion">
                     {% if request.user.is_authenticated %}
-                        <p class="centered"><a href="{% url 'index' %}"><img src="{% static 'img/ui-sam.jpg' %}"
+                        <p class="centered"><a href="{% url 'index' %}"><img src="{% static 'img/xinyi.png' %}"
                                                                              class="img-circle" href="##"
                                                                              width="80"></a></p>
                         <h5 class="centered" href="###">{{ request.user.username }}, welcome！</h5>
@@ -97,15 +97,6 @@
                             <li><a href="{% url 'tasks:result_index' %}">Results</a></li>
                         </ul>
                     </li>
-{#                    <li class="sub-menu">#}
-{#                        <a href="#">#}
-{#                            <i class="fa fa-th"></i>#}
-{#                            <span>Other Results</span>#}
-{#                        </a>#}
-{#                        <ul class="sub">#}
-{#                            <li><a href="">Responsive Table</a></li>#}
-{#                        </ul>#}
-{#                    </li>#}
                 </ul>
                 <!-- sidebar menu end-->
             </div>
