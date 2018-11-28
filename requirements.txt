@@ -1,4 +1,4 @@
-django==1.11.10
+django==1.11.15
 django-crispy-forms>=1.6.0
 django-import-export>=0.5.1
 django-reversion>=2.0.0
