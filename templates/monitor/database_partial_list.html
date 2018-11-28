@@ -1,0 +1,47 @@
+{% for database in databases.object_list %}
+    <tr id="{{ database.name }}">
+        <td><div class="cell"><input id="check[]" name="check[]" type="checkbox" value="{{ database.id }}"></div></td>
+        <td class="monitor-status-td">
+            <div class="cell">
+                <button type="button" class="btn btn-xs btn-danger monitor-status"
+                    data-url="{% url 'monitor:database_status' database.id %}">Error</button>
+            </div>
+        </td>
+        <td class="database-name-td"><div class="cell">{{ database.client_name }}</div></td>
+        <td class="database-ip"><div class="cell">{{ database.ip }}</div></td>
+        <td class="database-port-td"><div class="cell">{{ database.port }}</div></td>
+        <td class="database-user-td"><div class="cell">{{ database.user_name }}</div></td>
+        <td class="database-client-type">
+            <div class="cell">
+                {% if database.client_type == 1 %}
+                    mysql
+                {% elif database.client_type == 2 %}
+                    mongodb
+                {% elif database.client_type == 3 %}
+                    redis
+                {% endif %}
+            </div>
+        </td>
+        <td class="project-operation-button" style="width: 260px">
+            <div class="cell">
+                <button type="button" class="btn btn-warning btn-xs js-update-monitor"
+                        data-url="{% url 'monitor:database_update' database.id %}" >
+                    <span class="fa fa-edit"></span>&ensp;Edit
+                </button>
+                <button type="button" data-url="{% url 'monitor:database_db_list' database.id database.client_type %}"
+                        class="btn btn-theme03 btn-xs" id="view-db-connection">
+                    <span style="color: white"> <span class="fa fa-database"></span>&ensp;View db</span>
+                </button>
+                <button type="button"
+                        class="btn btn-danger btn-xs js-delete-monitor"
+                        data-url="{% url 'monitor:database_remove' database.id %}" >
+                    <span class="fa fa-remove"></span>&ensp;Delete
+                </button>
+            </div>
+        </td>
+    </tr>
+{% empty %}
+    <tr>
+        <td colspan="8" class="text-center bg-warning">No DatabaseClient</td>
+    </tr>
+{% endfor %}

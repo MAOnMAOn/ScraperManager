@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block custom_css %}
+    <link href="{% static 'css/deploy.css' %}" rel="stylesheet">
+    <link href="{% static 'css/monitor.css' %}" rel="stylesheet">
+{% endblock %}
+{% block custom_js %}
+    <script type="text/javascript" src="{% static 'js/echarts.min.js' %}"></script>
+    <script src="{% static 'js/monitor.js' %}"></script>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="client-container">
+            <div class="client-container-div">
+                <div class="row-container-header col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-7 col-md-7 col-xs-8 col-sm-8">
+                        <h3><i class=""></i>Server Panels</h3>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-xs-4 col-sm-4" style="margin-top: 15px;">
+                        <div class="input-group search-group ">
+                            <input id="search-keywords" class="form-control" type="text" name="" value="" placeholder="Search server">
+                            <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button" id="searchButton">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="col-xs-2 col-sm-1"></div>
+
+                    <div class="col-lg-2 col-md-2 col-xs-4 col-sm-4" style="margin-top: 15px">
+                        <button type="button" class="btn btn-primary js-create-monitor pull-right"
+                                data-url="{% url 'monitor:server_create' %}">
+                            <span class="glyphicon glyphicon-plus"></span>&ensp;
+                            New Server
+                        </button>
+                    </div>
+                </div>
+                <div style="height: 30px"></div>
+                <div class="table-container">
+                    <table class="table table-bordered table-hover table-responsive table-condensed" id="monitor-table">
+                        <thead class="thead-thead">
+                            <tr>
+                                <th><div class="cell"><input id="check-all" name="check-all" type="checkbox"></div></th>
+                                <th><div class="cell">Status</div></th>
+                                <th><div class="cell">Name</div></th>
+                                <th><div class="cell">IP</div></th>
+                                <th><div class="cell">Port</div></th>
+                                <th><div class="cell">User</div></th>
+                                <th><div class="cell">Operation</div></th>
+                            </tr>
+                        </thead>
+                        <tbody id="">
+                            {% include 'monitor/server_partial_list.html' %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="pull-left" id="batch-operate-div">
+                            <button type="button" class="btn btn-danger btn-xs" disabled="disabled"
+                                    data-url="" id="batch-operate" name="batch-operate">
+                                <span class="glyphicon glyphicon-trash"></span>&ensp;
+                                Batch Delete
+                            </button>
+                        </div>
+                        <div class="pull-right" id="paginator-div">
+                            <span class="page-list" >Showing {{ servers.paginator.start_item }} to
+                                    {{ servers.paginator.end_item }} of {{ servers.paginator.count }} rows,
+                            </span>
+                            <span class="page-list">
+                                <span class="btn-group dropup">
+                                    <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdownMenu"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="page-size">{{ servers.paginator.per_page }}</span>
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li role="menuitem" class="{% ifequal servers.paginator.per_page 5 %}active{% endifequal %}"><a href="?pageSize=5">5</a></li>
+                                        <li role="menuitem" class="{% ifequal servers.paginator.per_page 10 %}active{% endifequal %}"><a href="?pageSize=10">10</a></li>
+                                        <li role="menuitem" class="{% ifequal servers.paginator.per_page 25 %}active{% endifequal %}"><a href="?pageSize=25">25</a></li>
+                                        <li role="menuitem" class="{% ifequal servers.paginator.per_page 50 %}active{% endifequal %}"><a href="?pageSize=50">50</a></li>
+                                        <li role="menuitem" class="{% ifequal servers.paginator.per_page 100 %}active{% endifequal %}"><a href="?pageSize=100">100</a></li>
+                                        <li role="menuitem" class="{% ifequal servers.paginator.per_page servers.paginator.count %}active{% endifequal %}">
+                                            <a href="?pageSize={{ servers.paginator.count }}">All</a>
+                                        </li>
+                                    </ul>
+                                </span> rows per page
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="pageturn pull-right " id="pageturn" style="margin-top: 10px">
+                            <ul class="pagelist">
+                                {% if servers.has_previous %}
+                                    <li class="long"><a href="?{{ servers.previous_page_number.querystring }}">Prev Page</a></li>
+                                {% endif %}
+
+                                {% for page in servers.pages %}
+                                    {% if page %}
+                                        {% ifequal page servers.number %}
+                                            <li class="active"><a href="?{{ page.querystring }}">{{ page }}</a></li>
+                                        {% else %}
+                                            <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                                        {% endifequal %}
+                                    {% else %}
+                                        <li class="none" style="display: none"><a href="">...</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if servers.has_next %}
+                                    <li class="long"><a href="?{{ servers.next_page_number.querystring }}">Next Page</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div style="height: 10px"></div>
+
+            </div>
+
+            <div class="row db-info-container">
+                <div class="" id="row-monitor-div">
+                    <div id="server-info-div">
+                        <div><h4 class="monitor-server-title" style="" id="">
+                            <i class="fa fa-server"></i>&ensp;<i id="server-name-i">Server info</i>
+                            <i class="pull-right" id="server-hardware-i"></i>
+                        </h4></div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="server-cpu-container" style="margin-top: 8px">
+                            <div id="server-cpu-chart" style="width: 500px; height: 400px"></div>
+                            <div style="height: 20px"></div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="server-mem-container" style="margin-top: 8px">
+                            <div id="server-mem-chart" style="width: 500px; height: 400px"></div>
+                            <div style="height: 20px"></div>
+                        </div>
+                        <pre style="display: none">
+                            No message
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- just for monitor create update delete-->
+    <div class="modal fade" id="modal-monitor">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
+    <!-- just for batch delete-->
+    <div class="modal fade" id="modal-batch-operate">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Confirm batch deletion</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="lead">Are you sure you want to delete your chosen <strong>Server Objects</strong>?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger js-batch-operate" >Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

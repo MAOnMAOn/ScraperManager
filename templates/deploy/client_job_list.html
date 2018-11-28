@@ -1,0 +1,30 @@
+<div class="panel panel-default panel-spider-job_{{ project_key }}" id="panel_spider_{{ project_key }}_1" style="margin-top: 0">
+    <div class="el-collapse-item__header" role="tab" onclick="processClick(this)" >
+
+        <i class="fa fa-key"></i>&ensp;&ensp;<span>Job ID: </span><span id="spider-job-id">{{ job_id|default:"spider_id" }}</span>&ensp;&ensp;
+        <i class="fa fa-bug"></i>&ensp;<span>Spider Name: </span>
+    <div data-url="{% url 'deployment:job_log' client.id project_key spider_name|default:"demo" job_id|default:999 %}"
+         id="job-log-a-id" style="display: none"></div>
+            <span id="spider-job-name">{{ spider_name|default:"spider_name" }}</span>&ensp;&ensp;
+        <i class="fa fa-clock-o"></i>&ensp;<span>Start Time: </span><span data-value="spider-start-time">{{ start_time |default:"00:00:00" }}</span>&ensp;&ensp;
+        <span id="end-time-display-span" style=""> <!-- add the style display:none, just for the end time data -->
+            <i class="fa fa-clock-o"></i>&ensp;<span>End Time: </span><span data-value="spider-end-time"></span>
+        </span>
+        <span class="pull-right">
+            <span class="pull-left" id="job-cancel-span">
+                <button class="btn btn-xs btn-danger" id="job-cancel-button" role="button" onclick="event.stopPropagation();"
+                        data-url="{% url 'deployment:job_cancel' client.id project_key job_id|default:999 %}">
+                    <span><i class="fa fa-remove"></i>&ensp;<span id="spider-job-cancel-span">stop</span></span>
+                </button>
+            </span>
+            <span class="pull-right" style="margin-right: 15px; margin-left: 15px">
+                <button class="btn-xs btn-warning btn" id="spider-job-status-button">
+                            <span id="spider-job-status-span">pending</span>
+                </button></span>
+        </span>
+    </div>
+    <div id="job-log-text" style="display: none">
+        <pre id="log-pre">No Logs</pre>
+    </div>
+</div>
+

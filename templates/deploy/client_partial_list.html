@@ -1,0 +1,51 @@
+{% for client in clients.object_list %}
+    <tr>
+        <td><div class="cell"><input id="check[]" name="check[]" type="checkbox" value="{{ client.id }}"></div></td>
+        <td class="client-status-td">
+            <div class="cell">
+                <button type="button" class="btn btn-xs btn-danger client-status"
+                    data-url="{% url 'deployment:client_status' client.id %}">Error
+                </button>
+            </div>
+        </td>
+        <td><div class="cell">
+            {{ client.id }}
+        </div></td>
+        <td><div class="cell">
+            {{ client.name }}
+        </div></td>
+        <td><div class="cell">
+            {{ client.ip }}
+        </div></td>
+        <td><div class="cell">
+            {{ client.port }}
+        </div></td>
+        <td><div class="cell">
+            {{ client.auth }}
+        </div></td>
+        <td style="width: 260px">
+            <div class="cell">
+                <button type="button"
+                    class="btn btn-warning btn-xs js-update-client"
+                    data-url="{% url 'deployment:client_update' client.id %}">
+                    <span class="fa fa-edit"></span>&ensp; Edit
+                </button>
+                <button type="button" id="getAHref"
+                    class="btn btn-theme03 btn-xs">
+                    <a href="{% url 'deployment:client_schedule' client.id %}" style="color: white">
+                        <span class="fa fa-sitemap"></span>&ensp;Schedule</a>
+                </button>
+                <button type="button"
+                    class="btn btn-danger btn-xs js-delete-client"
+                    data-url="{% url 'deployment:client_remove' client.id %}">
+                    <span class="fa fa-remove"></span>&ensp;Delete
+                </button>
+            </div>
+        </td>
+    </tr>
+{% empty %}
+    <tr>
+        <td colspan="8" class="text-center bg-warning">No client</td>
+    </tr>
+{% endfor %}
+

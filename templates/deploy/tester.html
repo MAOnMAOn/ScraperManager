@@ -1,0 +1,60 @@
+{% for job in spider_value %}
+    <div class="panel panel-default panel-spider-job" id="panel_spider_{{ project_key }}_1">
+        <div class="panel-heading" role="tab" id="headingOne" data-url="{% url 'deployment:job_list' client.id project_key %}">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" id="spider-status-logs"
+                   href="#collapseOne_{{ project_key }}_1" aria-expanded="true" aria-controls="collapseOne_{{ project_key }}_1">
+                    {% for key, value in job.items %}
+                        {% if key == 'id' %}
+                            <span id="spider-job-id"><i class="fa fa-key"></i>&nbsp;&nbsp;Job ID: {{ value }}</span>&nbsp;&nbsp;
+                        {% elif key == 'spider' %}
+                            <span id="spider-job-name"><i class="fa fa-bug"></i>&nbsp;&nbsp;Spider Name: {{ value }}</span>&nbsp;&nbsp;
+                        {% elif key == 'start_time' %}
+                            <i class="fa fa-clock-o"></i>&nbsp;&nbsp;<span data-value="spider-start-time">Start Time: {{ value }}</span>&nbsp;&nbsp;
+                        {% elif key == 'end_time' %}
+                            <i class="fa fa-clock-o"></i>&nbsp;&nbsp;<span data-value="spider-end-time">End Time: {{ value }}</span>
+                        {% elif key == 'status' %}
+                            <span class="pull-right"><button class="btn-sm btn-info btn" id="spider-job-status-button">
+                                                <span id="spider-job-status-span">{{ value }}</span></button></span>
+                        {% endif %}
+                    {% endfor %}
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne_{{ project_key }}_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body" id="collapseOne-add-panel-default">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#collapseOne_{{ project_key }}_1"
+                               href="#collapseTwo_{{ project_key }}_1" aria-expanded="false" aria-controls="collapseTwo_{{ project_key }}_1">
+                                Collapsible Group Item #2
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo_{{ project_key }}_1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth n
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#collapseOne_{{ project_key }}_1"
+                               href="#collapseThree_{{ project_key }}_1" aria-expanded="false" aria-controls="collapseThree_{{ project_key }}_1">
+                                Collapsible Group Item #3
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree_{{ project_key }}_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high lifesamus labore sustainable VHS.
+                        </div>
+                    </div>
+                </div>
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
+            </div>
+        </div>
+    </div>
+{% endfor %}

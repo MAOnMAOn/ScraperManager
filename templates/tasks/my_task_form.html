@@ -1,0 +1,30 @@
+{% load widget_tweaks %}
+{% for field in form %}
+    <div class="form-group{% if field.errors %} has-error{% endif %}">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {% if field.name == 'enabled' %}
+            {% render_field field class="checkboxinput" style="margin-left: 5px;" %}
+        {% elif field.name == 'expires' %}
+            {% render_field field  class="form-control" id="form_datetime" %}
+        {% else %}
+            {% render_field field class="form-control" %}
+        {% endif %}
+        {% for error in field.errors %}
+            <p class="help-block">{{ error }}</p>
+        {% endfor %}
+        {% if field.help_text %}
+            <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+    </div>
+{% endfor %}
+<div class="form-group">
+    <label for="id_max_retries">max_retries</label>
+    <input type="number" name="max_retries" class="form-control" required="" id="id_max_retries" value="3">
+</div>
+<div class="form-group">
+    <label for="id_is_send_email">is_send_email</label>
+    <input type="checkbox" name="is_send_email" style="margin-left: 5px;" class="checkboxinput" id="id_is_send_email" checked="">
+</div>
+
+
+

@@ -1,0 +1,50 @@
+{% for task in tasks.object_list %}
+    <tr>
+        <td><div class="cell"><input id="check[]" name="check[]" type="checkbox" value="{{ task.id }}"></div></td>
+        <td><div class="cell">
+            {{ task.name }}
+        </div></td>
+        <td><div class="cell">
+            {{ task.task }}
+        </div></td>
+        <td><div class="cell">
+            {{ task.interval|default:"" }}
+        </div></td>
+        <td><div class="cell">
+            {{ task.crontab|default:"" }}
+        </div></td>
+        <td><div class="cell">
+            {{ task.kwargs }}
+        </div></td>
+        <td><div class="cell">
+            {{ task.enabled }}
+        </div></td>
+        <td><div class="cell">
+            {{ task.expires|default:"" }}
+        </div></td>
+        <td style="width: 130px">
+            <div class="cell">
+                <button type="button"
+                    class="btn btn-warning btn-xs js-update-task"
+                    data-url=
+                    {% if 'client' in task.kwargs %}
+                        {% url 'tasks:job_update' task.id %}
+{#                    {% elif 'is_send_email' in task.kwargs  %}#}
+{#                        {% url 'tasks:my_task_update' task.id %}#}
+                    {% else %} {% url 'tasks:my_task_update' task.id %}
+                    {% endif %}>
+                    <span class="fa fa-edit"></span>&ensp; Edit
+                </button>
+                <button type="button"
+                    class="btn btn-danger btn-xs js-delete-task"
+                    data-url="{% url 'tasks:job_remove' task.id %}">
+                    <span class="fa fa-remove"></span>&ensp;Delete
+                </button>
+            </div>
+        </td>
+    </tr>
+{% empty %}
+    <tr>
+        <td colspan="9" class="text-center bg-warning">No task</td>
+    </tr>
+{% endfor %}

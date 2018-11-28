@@ -1,0 +1,280 @@
+.table > tbody > tr > td, .table > thead > tr > th {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    height: 40px;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+th {
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    background-color: #eef1f6;
+}
+
+div.cell {
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 24px;
+}
+
+.table-container {
+    width: 100%;
+    overflow-y: auto;
+    margin: 0 0 1em;
+}
+
+.client-container{
+    padding: 5px 30px 0 30px;
+    /*background-color: white;*/
+}
+
+.client-container-div{
+    background-color: white;
+}
+
+#client-table, #task-table {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#client-table, #spider-list-table, #task-table{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 20px 0 20px;
+    width: 93%;
+}
+
+#batch-operate-div {
+    margin-left: 28px;
+}
+
+#paginator-div, #pageturn {
+    margin-right: 28px;
+}
+
+#batch-operate-div button {
+    /*display:;*/
+}
+
+#spider-list-table {
+    margin-bottom: 0;
+}
+
+.job-schedule-title {
+    color: #535351;
+    height: 45px;
+    line-height: 45px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.panel-default {
+    /*margin: 0;*/
+    margin-left: auto;
+    margin-right: auto;
+    border-top: 0;
+    border-bottom: 0;
+    width: 93%;
+}
+
+#collapseOne-add-panel-default {
+    padding: 0;
+}
+
+.panel-default-sub {
+    width: auto;
+}
+
+span {
+    font-family: "Helvetica Neue";
+    font-size: 13px;
+}
+
+span.page-list {
+    font-size: 15px;
+}
+
+table tr th {
+    font-family: "Helvetica Neue";
+    color: rgb(51, 51, 51);
+    font-size: 15px;
+}
+
+
+table tr td {
+    font-family: "Helvetica Neue";
+    font-size: 15px;
+    color: rgb(51, 51, 51);
+    /*font-weight: bold;*/
+}
+
+
+/*table.el-table {*/
+    /*border: 0;*/
+/*}*/
+
+
+h3, h4 {
+    color: rgb(51, 51, 51);
+}
+
+pre {
+    display: block;
+    font-size: 1em;
+    font-family: monospace, monospace;
+}
+
+.deploy-info-container {
+    padding: 1px 0 30px 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#row-deploy-div {
+    padding: 0;
+}
+
+#deploy-project-info, #deploy-project-build {
+    padding-bottom: 30px;
+    /*padding: 0 0 30px 20px;*/
+    background-color: white;
+}
+
+#deploy-project-info {
+    margin-right: 5px;
+}
+
+#deploy-project-build {
+    margin-left: 5px;
+}
+
+.row-container-header, .deploy-form-title {
+    border-top: 3px solid #65cea7;
+    border-bottom: 1px dotted rgba(0,0,0,.2);
+}
+
+.deploy-form-title {
+    padding: 15px;
+}
+
+#deploy-form-horizontal {
+    padding-top: 15px;
+    padding-left: 30px;
+}
+
+.deploy-project-form-label {
+    padding-right: 0;
+}
+
+.deploy-form-input {
+    padding-left: 0;
+}
+
+.deploy-project-form-div {
+    border: 0;
+    color: rgb(51, 51, 51);
+    font-family: "Helvetica Neue";
+    font-weight: bolder;
+}
+
+/*#page-crawled, #item-scraped {*/
+    /*color: green;*/
+    /*font-weight: bold;*/
+    /*font-size: 16px;*/
+/*}*/
+
+/*#page-crawled-speed, #item-scraped-speed {*/
+    /*color: red;*/
+    /*font-weight: bold;*/
+    /*font-size: 16px;*/
+/*}*/
+
+
+div.el-collapse {
+    border: 1px solid #dfe6ec;
+    border-radius: 0;
+}
+
+div.el-collapse-item__header {
+    height: 43px;
+    line-height: 43px;
+    padding-left: 15px;
+    background-color: #fff;
+    color: #48576a;
+    cursor: pointer;
+    border-bottom: 1px solid #dfe6ec;
+    font-size: 13px;
+}
+
+div.el-collapse-item__wrap {
+    will-change: height;
+    background-color: #fbfdff;
+    overflow: hidden;
+    box-sizing: border-box;
+    border-bottom: 1px solid #dfe6ec;
+}
+
+span.m-l-md {
+    margin-left: 20px!important;
+}
+
+.el-collapse-item__content {
+    padding: 10px;
+    font-size: 13px;
+    color: #1f2d3d;
+    line-height: 1.769230769230769;
+}
+
+
+/*下面是分页相关样式*/
+.pageturn {
+    margin-right: 28px;
+    display: table;
+    text-align: center;
+}
+
+.pageturn .pagelist {
+    display: table-cell;
+    vertical-align: middle;
+    overflow: hidden;
+}
+
+.pageturn li {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 10px;
+    float: left;
+    text-align: center;
+}
+
+.pageturn li:first-child {
+    margin-left: 0;
+}
+
+.pageturn li:hover a, .pageturn .active a {
+    background: #286090;
+    color: #fff;
+    border-color: #eaeaea;
+}
+
+.pageturn a {
+    border: 1px solid #eaeaea;
+    display: block;
+    height: 28px;
+    color: #6c6c6c;
+}
+
+.pageturn .long {
+    width: 100px;
+}
+
+.pageturn .none a {
+    border: 0;
+}

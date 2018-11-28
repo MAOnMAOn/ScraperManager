@@ -1,0 +1,39 @@
+{% for result in results.object_list %}
+    <tr>
+        <td><div class="cell"><input id="check[]" name="check[]" type="checkbox" value="{{ result.id }}"></div></td>
+        <td><div class="cell">
+            {{ result.task_id }}
+        </div></td>
+        <td><div class="cell">
+            {{ result.task_name }}
+        </div></td>
+        <td><div class="cell">
+            {{ result.task_kwargs  }}
+        </div></td>
+        <td><div class="cell">
+            {{ result.result|default_if_none:"" }}
+        </div></td>
+        <td><div class="cell">
+            {{ result.status }}
+        </div></td>
+        <td><div class="cell">
+            {{ result.date_done }}
+        </div></td>
+        <td><div class="cell">
+            {{ result.traceback|default_if_none:"" }}
+        </div></td>
+        <td style="">
+            <div class="cell">
+                <button type="button"
+                    class="btn btn-danger btn-xs js-delete-task"
+                    data-url="{% url 'tasks:result_remove' result.id %}">
+                    <span class="fa fa-remove"></span>&ensp;Delete
+                </button>
+            </div>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="9" class="text-center bg-warning">No result</td>
+    </tr>
+{% endfor %}

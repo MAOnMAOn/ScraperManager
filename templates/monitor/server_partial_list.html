@@ -1,0 +1,37 @@
+{% for server in servers.object_list %}
+    <tr id="{{ server.name }}">
+        <td><div class="cell"><input id="check[]" name="check[]" type="checkbox" value="{{ server.id }}"></div></td>
+        <td class="monitor-status-td">
+            <div class="cell">
+                <button type="button" class="btn btn-xs
+                btn-danger monitor-status" data-url="{% url 'monitor:server_status' server.id %}">Error</button>
+            </div>
+        </td>
+        <td class="server-name-td"><div class="cell">{{ server.name }}</div></td>
+        <td class="server-ip"><div class="cell">{{ server.ip }}</div></td>
+        <td class="server-port-td"><div class="cell">{{ server.port }}</div></td>
+        <td class="server-user-td"><div class="cell">{{ server.ssh_user }}</div></td>
+        <td class="project-operation-button" style="width: 260px">
+            <div class="cell">
+                <button type="button"
+                        class="btn btn-warning btn-xs js-update-monitor"
+                        data-url="{% url 'monitor:server_update' server.id %}" >
+                    <span class="fa fa-edit"></span>&ensp;Edit
+                </button>
+                <button type="button" class="btn btn-theme03 btn-xs" id="server-info_{{ server.id }}"
+                        name="view-server-info" data-url="{% url 'monitor:server_info' server.id %}">
+                    <span style="color: white"> <span class="fa fa-server"></span>&ensp;View</span>
+                </button>
+                <button type="button"
+                        class="btn btn-danger btn-xs js-delete-monitor"
+                        data-url="{% url 'monitor:server_remove' server.id %}" >
+                    <span class="fa fa-remove"></span>&ensp;Delete
+                </button>
+            </div>
+        </td>
+    </tr>
+{% empty %}
+    <tr>
+        <td colspan="8" class="text-center bg-warning">No Server</td>
+    </tr>
+{% endfor %}

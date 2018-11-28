@@ -1,0 +1,70 @@
+#monitor-table {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 20px 0 20px;
+    width: 95%;
+}
+
+.db-info-container {
+    padding: 1px 0 10px 0;
+    margin-top: 8px;
+    margin-left: 0;
+    margin-right: 0;
+    /*height:auto!important;*/
+    /*min-height:100px;*/
+    background-color: white;
+}
+
+#row-monitor-div {
+    padding: 0;
+}
+
+.monitor-db-title, .monitor-server-title {
+    border-top: 3px solid #65cea7;
+    border-bottom: 1px dotted rgba(0,0,0,.2);
+    padding: 15px;
+}
+
+#db-list-info, #db-table-info{
+    padding-bottom: 30px;
+}
+
+
+#db-list-info{
+    border-right: 1px dotted rgba(0,0,0,.2);
+}
+
+
+/* for bootstrap tree view*/
+.treeview span.indent {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.treeview span.icon {
+    width: 12px;
+    margin-right: 5px;
+}
+
+.treeview .node-disabled {
+    color: silver;
+    cursor: not-allowed;
+}
+
+.list-group-item {
+    font-size: 15px;
+    cursor: pointer;
+    position: relative;
+    display: table-row-group;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    white-space: nowrap;
+}
+
+.table > tbody > tr > th {
+    text-align: center;
+}

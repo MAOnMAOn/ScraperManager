@@ -1,0 +1,35 @@
+{% for project in projects %}
+    <tr id="{{ project.name }}">
+        <td><div class="cell"><input id="check[]" name="check[]" type="checkbox" value="{{ project.name }}"></div></td>
+        <td class="project-name-td"><div class="cell">{{ project.name }}</div></td>
+        <td class="project-desc"><div class="cell">description</div></td>
+        <td class="project-build-td"><div class="cell">build</div></td>
+        <td class="project-config-td"><div class="cell">configurable</div></td>
+        <td class="project-build-time-td"><div class="cell">build at</div></td>
+        <td class="project-operation-button" style="width: 260px">
+            <div class="cell">
+                <a class="project-build-a" id="{{ project.name }}" href="{% url 'deployment:project_build' project.name %}"
+               style="display: none"></a>
+                <button type="button"
+                        class="btn btn-warning btn-xs js-update-client"
+                        data-url="" style="display: none">
+                    <span class="fa fa-edit"></span>&ensp; Edit
+                </button>
+                <button type="button" id="getAHref"
+                        class="btn btn-theme03 btn-xs">
+                    <a href="{% url 'deployment:project_deployment' project.name %}" style="color: white">
+                        <span class="fa fa-cloud-upload"></span>&ensp;Deploy</a>
+                </button>
+                <button type="button"
+                        class="btn btn-danger btn-xs js-delete-client"
+                        data-url="{% url 'deployment:project_remove' project.name %}" >
+                    <span class="fa fa-remove"></span>&ensp;Delete
+                </button>
+            </div>
+        </td>
+    </tr>
+{% empty %}
+    <tr>
+        <td colspan="7" class="text-center bg-warning">No project</td>
+    </tr>
+{% endfor %}

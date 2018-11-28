@@ -1,0 +1,40 @@
+{% for interval in intervals.object_list %}
+    <tr>
+        <td><div class="cell"><input id="check[]" name="check[]" type="checkbox" value="{{ interval.id }}"></div></td>
+        <td><div class="cell">
+            {{ interval.id }}
+        </div></td>
+        <td><div class="cell">
+            {{ interval }}
+        </div></td>
+        <td><div class="cell">
+            {{ interval.every }}
+        </div></td>
+        <td><div class="cell">
+            {{ interval.period }}
+        </div></td>
+        <td style="">
+            <div class="cell">
+                <button type="button"
+                    class="btn btn-warning btn-xs js-update-task"
+                    data-url="{% url 'tasks:interval_update' interval.id %}">
+                    <span class="fa fa-edit"></span>&ensp; Edit
+                </button>
+{#                <button type="button" id="getAHref"#}
+{#                    class="btn btn-theme03 btn-xs">#}
+{#                    <a href="{% url 'deployment:task_schedule' task.id %}" style="color: white">#}
+{#                        <span class="fa fa-sitemap"></span>&ensp;Schedule</a>#}
+{#                </button>#}
+                <button type="button"
+                    class="btn btn-danger btn-xs js-delete-task"
+                    data-url="{% url 'tasks:interval_remove' interval.id %}">
+                    <span class="fa fa-remove"></span>&ensp;Delete
+                </button>
+            </div>
+        </td>
+    </tr>
+{% empty %}
+    <tr>
+        <td colspan="6" class="text-center bg-warning">No interval</td>
+    </tr>
+{% endfor %}

@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block custom_css %}
+    <link href="{% static 'css/deploy.css' %}" rel="stylesheet">
+{% endblock %}
+{% block custom_js %}
+    <script src="{% static 'js/deployment.js' %}"></script>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="client-container">
+            <div class="client-container-div">
+                <div class="row-container-header col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-10 col-md-10 col-xs-8 col-sm-6">
+                        <h3><i class=""></i>Projects Panels</h3>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-xs-4 col-sm-6" style="margin-top: 15px; display: none">
+                        <button type="button" class="btn btn-primary btn-xs js-create-client pull-right"
+                                data-url="">
+                            <span class="glyphicon glyphicon-plus"></span>&ensp;
+                            New project
+                        </button>
+                    </div>
+                </div>
+                <div style="height: 30px"></div>
+                <div class="table-container">
+                    <table class="table table-bordered table-hover table-condensed" id="client-table">
+                        <thead class="client-thead">
+                        <tr>
+                            <th><div class="cell">
+                                <input id="check-all" name="check-all" type="checkbox">
+                            </div></th>
+                            <th><div class="cell">Name</div></th>
+                            <th><div class="cell">Description</div></th>
+                            <th><div class="cell">Built</div></th>
+                            <th><div class="cell">Configurable</div></th>
+                            <th><div class="cell">Built At</div></th>
+                            <th><div class="cell">Operations</div></th>
+                        </tr>
+                        </thead>
+                        <tbody id="project-deploy-tbody">
+                            {% include 'deploy/project_partial_list.html' %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pull-left" id="batch-operate-div">
+                    <button type="button" class="btn btn-danger btn-xs " disabled="disabled"
+                            data-url="" id="batch-operate" name="batch-operate">
+                        <span class="glyphicon glyphicon-trash"></span>&ensp;
+                        Batch Delete
+                    </button>
+                </div>
+                <div style="height: 35px"></div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- just for client create update delete-->
+    <div class="modal fade" id="modal-client">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
+    <!-- just for batch delete-->
+    <div class="modal fade" id="modal-batch-operate">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Confirm batch deletion</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="lead">Are you sure you want to delete your chosen <strong>Projects</strong>?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger js-batch-operate" >Delete projects</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

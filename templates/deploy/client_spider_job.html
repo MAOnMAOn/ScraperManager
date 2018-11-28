@@ -1,0 +1,36 @@
+{% for job in spider_value %}
+    <div class="panel panel-default panel-spider-job_{{ project_key }}" style="margin-top: 0;"
+         id="panel_spider_{{ project_key }}_{{ forloop.counter }}">
+        <div class="el-collapse-item__header" role="tab" onclick="processClick(this)">
+            {% for key, value in job.items %}
+                {% if key == 'id' %}
+                    <i class="fa fa-key"></i>&ensp;&ensp;<span>Job ID: </span><span id="spider-job-id">{{ value }}</span>&ensp;&ensp;
+                {% elif key == 'spider' %}
+                    <i class="fa fa-bug"></i>&ensp;<div data-url="{% url 'deployment:job_log' client.id project_key job.spider job.id %}"
+                                                             id="job-log-a-id" style="display: none"></div>
+                    <span>Spider Name: </span><span id="spider-job-name">{{ value }}</span>&ensp;&ensp;
+                {% elif key == 'start_time' %}
+                    <i class="fa fa-clock-o"></i>&ensp;<span>Start Time: </span><span data-value="spider-start-time">{{ value|slice:":19" }}</span>&ensp;&ensp;
+                {% elif key == 'end_time' %}
+                    <span id="end-time-display-span" >
+                        <i class="fa fa-clock-o"></i>&ensp;<span>End Time: </span><span data-value="spider-end-time">00:00:00</span>
+                    </span>
+                {% elif key == 'status' %}
+                    <span class="pull-right">
+                        <span class="pull-left" style="{% if value == 'finished' %}display: none{% endif %}" id="job-cancel-span">
+                            <button class="btn btn-xs btn-danger" id="job-cancel-button" role="button" onclick="event.stopPropagation();"
+                                    data-url="{% url 'deployment:job_cancel' client.id project_key job.id %}">
+                                <span><i class="fa fa-remove"></i>&ensp;<span id="spider-job-cancel-span">stop</span></span>
+                            </button>
+                        </span>
+                        <span class="pull-right" style="margin-right: 15px; margin-left: 15px"><button class="btn-xs btn-info btn" id="spider-job-status-button">
+                                        <span id="spider-job-status-span">{{ value }}</span></button></span>
+                    </span>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div id="job-log-text" style="display: none">
+            <pre id="log-pre">No Logs</pre>
+        </div>
+    </div>
+{% endfor %}

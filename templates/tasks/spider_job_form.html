@@ -1,0 +1,46 @@
+{% load widget_tweaks %}
+<div class="form-group">
+    <label for="id_client">Scrapyd Client</label>
+    <select name="client" class="form-control" required="" id="id_client">
+        {% for field in client_set %}
+            {% if field.name != client %}
+                <option value="{{ field.name }}" selected="">{{ field.name }}</option>
+            {% endif %}
+        {% endfor %}
+        <option value="{{ client }}" selected="">{{ client }}</option>
+    </select>
+</div>
+<div class="form-group">
+    <label for="id_project">Project Name</label>
+    <select name="project" class="form-control" required="" id="id_project">
+        {% for field in project_set %}
+            {% if field.name != project %}
+                <option value="{{ field.name }}" selected="">{{ field.name }}</option>
+            {% endif %}
+        {% endfor %}
+        <option value="{{ project }}" selected="">{{ project }}</option>
+    </select>
+</div>
+<div class="form-group" style="">
+    <label for="spider_name">spider</label>
+    <input type="text" name="spider" maxlength="200" class="form-control"
+           required="" id="spider_name" placeholder="input spider name" value="{{ spider }}">
+</div>
+{% for field in form %}
+    <div class="form-group{% if field.errors %} has-error{% endif %}">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {% if field.name == 'enabled' %}
+            {% render_field field class="checkboxinput" style="margin-left: 5px;" %}
+        {% elif field.name == 'expires' %}
+            {% render_field field  class="form-control" id="form_datetime" %}
+        {% else %}
+            {% render_field field class="form-control" %}
+        {% endif %}
+        {% for error in field.errors %}
+            <p class="help-block">{{ error }}</p>
+        {% endfor %}
+        {% if field.help_text %}
+            <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+    </div>
+{% endfor %}

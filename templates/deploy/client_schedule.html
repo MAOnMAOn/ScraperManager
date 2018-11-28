@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block custom_css %}
+    <link href="{% static 'css/deploy.css' %}" rel="stylesheet">
+{% endblock %}
+{% block custom_js %}
+    <script src="{% static 'js/deployment.js' %}"></script>
+{% endblock %}
+{% block content %}
+    <div style="height: 15px"></div>
+    <div class="schedule-div">
+        {% for project in projects %}
+            {% with the_counter=forloop.counter %}
+            {% for project_key, project_value in project.items %}
+                <div class="row client-container">
+                    <div class="client-container-div" id="{{ project_key }}">
+                        <div class="row-container-header col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+                            <span class="job-schedule-title"><i class=""></i>&ensp;&ensp;{{ project_key }}</span>
+                        </div>
+                        <div style="height: 70px"></div>
+                        <table class="table table-bordered table-hover table-condensed el-table" id="spider-list-table">
+                            {% for spider_key, spider_value in project_value.items %}
+                                {% if spider_key == "spiders" %}
+                                    <thead>
+                                        <tr class="">
+                                            <th width="200px"><div class="cell">ID</div></th>
+                                            <th width="400px"><div class="cell">Name</div></th>
+                                            <th width="462px"><div class="cell">Operations</div></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for spider in spider_value %}
+                                        <tr>
+                                            {% for key, value  in spider.items %}
+                                                {% if key == 'id' %}
+                                                    <td><div class="cell">{{ value }}</div></td>
+                                                {% elif key == 'name' %}
+                                                    <td><div class="cell">{{ value }}</div></td>
+                                                    <td><div class="cell">
+                                                        <button type="button" class="btn btn-theme03 btn-xs" name="spider-run" id="{{ project_key }}"
+                                                                data-url="{% url 'deployment:spider_start' client.id project_key value %}">
+                                                        <span><i class="fa fa-caret-right"></i>&ensp;run</span>
+                                                        </button>
+                                                    </div></td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                        </table>
+                            <div class="spider-job-list-div el-collapse panel-default" style="display: none"
+                                 data-url="{% url 'deployment:job_list' client.id project_key %}">
+                                {% elif  spider_key == "jobs" %}
+                                    <div class="panel-group panel-group-accordion_{{ project_key }}" id="accordion"
+                                         role="tablist"
+                                         aria-multiselectable="true" >
+                                        {% include "deploy/client_spider_job.html" %}
+                                    </div>
+                                    <div style="height: 10px; margin-bottom: 15px"></div>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                    </div>
+
+                </div>
+            {% endfor %}
+            {% endwith %}
+        {% endfor %}
+    </div>
+{% endblock %}
+
+
+
