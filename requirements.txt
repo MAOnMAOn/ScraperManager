@@ -1,4 +1,4 @@
-django==1.11.8
+django==1.11.10
 django-crispy-forms>=1.6.0
 django-import-export>=0.5.1
 django-reversion>=2.0.0
@@ -15,7 +15,7 @@ psutil==5.4.7
 mysqlclient
 scrapy>=1.5.1
 python-scrapyd-api==2.1.2
-requests==2.19.1
+requests>=2.20.0
 html5lib==1.0.1
 redis==2.10.6
 pymysql==0.9.2
