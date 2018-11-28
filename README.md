@@ -1,0 +1,2 @@
+# ScraperManager
+First commit.
