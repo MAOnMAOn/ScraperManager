@@ -153,8 +153,7 @@ CELERY_RESULT_BACKEND = 'django-db'
 CELERY_TIMEZONE = 'Asia/Shanghai'  # 指定时区，默认的时区是UTC
 
 # formatter: 'amqp://user:password@ip:port/vhost'
-CELERY_BROKER_URL = 'amqp://slkj:qwertyuiop@192.168.2.53:5672/scraper_manager'
-# CELERY_RESULT_BACKEND = 'redis://root:foobared@127.0.0.1:6379/3'
+CELERY_BROKER_URL = 'amqp://user:password@ip:port/vhost'
 
 #  celery -A DjangoCelery beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
