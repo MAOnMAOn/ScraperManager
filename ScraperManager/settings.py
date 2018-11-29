@@ -134,8 +134,8 @@ DATE_TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 
 EMAIL_HOST = "smtp.mxhichina.com"
 EMAIL_PORT = 25
-EMAIL_HOST_USER = "lvyp@idx365.com"
-EMAIL_HOST_PASSWORD = "Idxmail8"
+EMAIL_HOST_USER = "xxx@xxx5.com"
+EMAIL_HOST_PASSWORD = "xxx"
 EMAIL_USE_TLS = False
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
