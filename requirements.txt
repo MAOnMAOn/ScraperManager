@@ -12,7 +12,6 @@ pytz
 six==1.10.0
 redis==2.10.6
 psutil==5.4.7
-mysqlclient
 scrapy>=1.5.1
 python-scrapyd-api==2.1.2
 requests>=2.20.0
@@ -24,4 +23,3 @@ pillow==5.2.0
 paramiko==2.4.2
 celery==4.2.1
 kombu==4.2.1
-
