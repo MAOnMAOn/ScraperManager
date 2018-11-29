@@ -32,23 +32,23 @@ def start_spider_job(client, project, spider):
     return "success"
 
 
-def request_scrapyd_client(client, exception_retry_count):
+def request_scrapyd_client(client, max_reties):
     for retries in count(0):
         try:
             requests.get(scrapyd_url(client.ip, client.port), timeout=3)
             return {"Info": "client %s: request successfully." % (str(client.ip) + ":" + str(client.port))}
         except Exception:
-            if retries >= int(exception_retry_count):
+            if retries >= int(max_reties):
                 break
             return {"Error": "client %s: request failed." % (str(client.ip) + ":" + str(client.port))}
 
 
 @shared_task
-def check_scrapyd_client(is_send_email, exception_retry_count=3):
+def check_scrapyd_client(is_send_email, max_reties=3):
     data = dict()
     clients = Client.objects.all()
     for client in clients:
-        message = request_scrapyd_client(client, exception_retry_count)
+        message = request_scrapyd_client(client, max_reties)
         data.update({client.name: message})
     if is_send_email:
         email_title = "Request scrapyd client"
@@ -56,23 +56,23 @@ def check_scrapyd_client(is_send_email, exception_retry_count=3):
         send_mail(email_title, email_body, settings.DEFAULT_FROM_EMAIL, ["lvyp@idx365.com"])
 
 
-def ping_server(server, exception_retry_count):
+def ping_server(server, max_reties):
     for retries in count(0):
         response = os.system("ping -c 3 " + str(server.ip))
         if response == 0:
             return {"info": "server %s: ping successfully." % str(server.ip)}
         else:
-            if retries >= int(exception_retry_count):
+            if retries >= int(max_reties):
                 break
             return {"Error": "sever %s: is down." % str(server.ip)}
 
 
 @shared_task
-def check_server(is_send_email, exception_retry_count=3):
+def check_server(is_send_email, max_reties=3):
     data = dict()
     servers = Server.objects.all()
     for server in servers:
-        message = ping_server(server, exception_retry_count)
+        message = ping_server(server, max_reties)
         data.update({server.name: message})
     if is_send_email:
         email_title = "Ping Server results"
@@ -80,7 +80,7 @@ def check_server(is_send_email, exception_retry_count=3):
         send_mail(email_title, email_body, settings.DEFAULT_FROM_EMAIL, ["lvyp@idx365.com"])
 
 
-def test_db_connect(database, exception_retry_count):
+def test_db_connect(database, max_reties):
     for retries in count(0):
         try:
             if database.client_type == 1:
@@ -98,17 +98,17 @@ def test_db_connect(database, exception_retry_count):
                 return {"Error": "Get database type failed."}
             return {"Info": "Database connected successfully."}
         except Exception as e:
-            if retries >= int(exception_retry_count):
+            if retries >= int(max_reties):
                 break
             return {"Error": e.args}
 
 
 @shared_task
-def check_database(is_send_email, exception_retry_count=3):
+def check_database(is_send_email, max_reties=3):
     data = dict()
     databases = DatabaseClient.objects.all()
     for database in databases:
-        message = test_db_connect(database=database, exception_retry_count=exception_retry_count)
+        message = test_db_connect(database=database, max_reties=max_reties)
         data.update({database.client_name: message})
     if is_send_email:
         email_title = "Check Database Status"
