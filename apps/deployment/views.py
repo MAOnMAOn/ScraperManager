@@ -265,6 +265,7 @@ class ProjectDeployView(LoginRequireMixin, View):
         for client in clients:
             try:
                 deploy = Deploy.objects.get(client_id=client.id, project_id=project.id)
+                deploy.deployed_at = deploy.deployed_at.strftime(DATE_TIME_FORMAT)
                 if deploy.desc:
                     client.deploy_desc = deploy.desc
                 else:
