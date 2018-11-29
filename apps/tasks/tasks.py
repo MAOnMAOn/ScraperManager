@@ -17,7 +17,6 @@ from celery import shared_task
 from django.conf import settings
 from django.core.mail import send_mail
 
-
 from deployment.models import Client
 from monitor.core.databases import MysqlClient, MongoClient, RedisClient
 from monitor.models import DatabaseClient, Server
@@ -29,7 +28,6 @@ def start_spider_job(client, project, spider):
     client = Client.objects.get(name=client)
     scrapyd = get_scrapyd(client)
     scrapyd.schedule(project=project, spider=spider)
-    return "success"
 
 
 def request_scrapyd_client(client, max_reties):
